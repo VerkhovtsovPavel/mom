@@ -1,6 +1,10 @@
 package by.pv.mom.connection;
 
-import com.rabbitmq.client.*;
+import com.rabbitmq.client.AMQP;
+import com.rabbitmq.client.Channel;
+import com.rabbitmq.client.Connection;
+import com.rabbitmq.client.ConnectionFactory;
+import com.rabbitmq.client.DeliverCallback;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -80,6 +84,7 @@ public class RPCConnection implements AutoCloseable {
                     Thread.sleep(unit.toMillis(processingTime));
                 } catch (RuntimeException | InterruptedException e) {
                     log.error("[.]", e);
+                    Thread.currentThread().interrupt();
                 } finally {
                     channel.basicPublish("", delivery.getProperties().getReplyTo(), replyProps, stringToByteArray(response));
                     channel.basicAck(delivery.getEnvelope().getDeliveryTag(), false);

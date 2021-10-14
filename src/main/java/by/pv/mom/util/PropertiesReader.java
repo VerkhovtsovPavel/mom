@@ -1,22 +1,24 @@
 package by.pv.mom.util;
 
-
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.io.*;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Properties;
 
 public class PropertiesReader {
-    private final static Properties properties = new Properties();
+    private static final Properties properties = new Properties();
 
     public PropertiesReader() {
-        try (InputStream input = new FileInputStream("src/main/resources/creds.properties")) {
-            properties.load(input);
-        } catch (IOException e) {
-            Logger logger = LogManager.getRootLogger();
-            logger.warn("creds.properties is not found");
+        if (properties.isEmpty()) {
+            try (InputStream input = new FileInputStream("src/main/resources/creds.properties")) {
+                properties.load(input);
+            } catch (IOException e) {
+                Logger logger = LogManager.getRootLogger();
+                logger.warn("creds.properties is not found");
+            }
         }
     }
 

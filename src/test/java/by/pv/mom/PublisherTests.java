@@ -68,9 +68,9 @@ class PublisherTests {
         connection.bindReceiver(ROUTING_KEY, response.getCallback());
         ScheduledFuture sending = connection.scheduledSend(ROUTING_KEY, originMessage, 1, TimeUnit.SECONDS);
 
-        assertThrows(ConditionTimeoutException.class, () -> {
-            await().atMost(expectedSize, TimeUnit.SECONDS).until(()-> response.getQueue().size() == 5);
-        });
+        assertThrows(ConditionTimeoutException.class, () ->
+                await().atMost(expectedSize, TimeUnit.SECONDS).until(()-> response.getQueue().size() == 5)
+        );
 
         sending.cancel(true);
         assertEquals(response.getQueue().size(), expectedSize);

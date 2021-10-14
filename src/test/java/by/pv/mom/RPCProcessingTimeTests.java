@@ -49,9 +49,9 @@ class RPCProcessingTimeTests {
 
         connection.call(originMessage, queue);
 
-        assertThrows(ConditionTimeoutException.class, () -> {
-            await().atMost(3, TimeUnit.SECONDS).until(()-> !queue.isEmpty());
-        });
+        assertThrows(ConditionTimeoutException.class, () ->
+                await().atMost(3, TimeUnit.SECONDS).until(()-> !queue.isEmpty())
+        );
 
         connection.unbindReceiver(tag);
     }

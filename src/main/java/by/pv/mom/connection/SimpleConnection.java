@@ -1,6 +1,10 @@
 package by.pv.mom.connection;
 
-import com.rabbitmq.client.*;
+import com.rabbitmq.client.BuiltinExchangeType;
+import com.rabbitmq.client.Channel;
+import com.rabbitmq.client.Connection;
+import com.rabbitmq.client.ConnectionFactory;
+import com.rabbitmq.client.DeliverCallback;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

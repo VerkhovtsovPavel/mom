@@ -1,4 +1,4 @@
-package by.pv.mom.second;
+package by.pv.mom.rpc;
 
 import by.pv.mom.connection.RPCConnection;
 import org.slf4j.Logger;
